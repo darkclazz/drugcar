@@ -5,7 +5,6 @@ from Project.Config import *
 import mechanicalsoup
 app = Flask(__name__)
 
-
 def GET_Phone_Network(message):
 
     message2 = message.replace('$', '')
@@ -73,7 +72,6 @@ def GET_Drug_Car(message):
         #print(type(soup2))
 
         links_list = []
-
 
         for link in soup2:
             links_list.append(link)
@@ -327,3 +325,5 @@ def ReplyMessage(Reply_token, TextMessage, Line_Acees_Token):
     data = json.dumps(data) ## dump dict >> Json Object
     r = requests.post(LINE_API, headers=headers, data=data) 
     return 200
+=======
+>>>>>>> 9e4d06249b17a56f9c11bb1280373ab3f1431560
