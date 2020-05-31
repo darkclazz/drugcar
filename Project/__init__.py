@@ -145,7 +145,6 @@ def GET_Drug_Car(message):
         links_list00 = []
 
 
-
         for link00 in soup:
             links_list00.append(link00)
 
