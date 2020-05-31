@@ -6,6 +6,45 @@ import mechanicalsoup
 app = Flask(__name__)
 
 
+def GET_Phone_Network(message):
+
+    message2 = message.replace('$', '')
+
+    browser = mechanicalsoup.StatefulBrowser()
+
+    browser.open("https://www.feel-pay.com/feelpay2012/faces/check_Number.xhtml;jsessionid=0AF02114131F48757E408C3571DE8528.feelpay02")
+
+    browser.select_form('form[id="checkNum"]')
+
+    browser["checkNum:__1a"] = message2
+
+    browser.submit_selected()
+
+    soup = browser.get_current_page().find_all('td')
+
+    links_list = []
+
+    for link in soup:
+        links_list.append(link)
+
+    links1 = links_list[6]
+
+    links_list1 = []
+
+
+    for link1 in links1:
+        links_list1.append(link1)
+
+    links_list1 = [str(strlink1) for strlink1 in links_list1]    # map to a list of strings
+    img1 = ''.join(links_list1)
+    itemimg1 = img1.split('"')
+    itemimg1send = " "+"เครือข่าย"+itemimg1[7].strip('/feelpay2012/').strip('images').strip('.pn')
+
+    Phone_Network = (message2+itemimg1send)
+
+    return Phone_Network
+
+
 def GET_Drug_Car(message):
     try :
         message2 = message.replace('#', '')
@@ -243,13 +282,17 @@ def webhook():
         print(Reply_token)
         message = payload['events'][0]['message']['text']
         
-        print(message)
+        #print(message)
         if '#' in message :
             Reply_messasge = 'ข้อมูลรถผ่านด่าน : {}'.format(GET_Drug_Car(message))
             ReplyMessage(Reply_token,Reply_messasge,Channel_access_token)
 
         elif '#' in message :
             Reply_messasge = 'ข้อมูลรถผ่านด่าน : {}'.format(GET_Drug_Car2(message))
+            ReplyMessage(Reply_token,Reply_messasge,Channel_access_token)
+
+        elif '$' in message :
+            Reply_messasge = (GET_Phone_Network(message))
             ReplyMessage(Reply_token,Reply_messasge,Channel_access_token)
        
         return request.json, 200
