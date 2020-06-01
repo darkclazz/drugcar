@@ -53,9 +53,7 @@ def GET_Drug_Car(message):
 
         # print(browser.get_url())
 
-        browser.select_form('form')
-        browser["name"] = "tanongsak.tho"
-        browser["password"] = "8393"
+        
 
         browser.submit_selected()
 
