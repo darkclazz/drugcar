@@ -52,7 +52,9 @@ def GET_Drug_Car(message):
         browser.open("http://thailpr.com/nsb/")
 
         # print(browser.get_url())
-
+        browser.select_form('form')
+        browser["name"] = "tanongsak.tho"
+        browser["password"] = "earth2012"
         
 
         browser.submit_selected()
@@ -199,7 +201,7 @@ def GET_Drug_Car(message):
 
         browser.select_form('form')
         browser["name"] = "tanongsak.tho"
-        browser["password"] = "8393"
+        browser["password"] = "earth2012"
 
         browser.submit_selected()
 
